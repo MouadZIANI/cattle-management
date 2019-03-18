@@ -44,7 +44,8 @@ class Achat extends Model
      *
      * @return float
      */
-    public function getMontantTotalTransportAchatAttribute() {
+    public function getMontantTotalTransportAchatAttribute() 
+    {
         return $this->bovins->sum(function($bovin) {
             return $bovin->frais->sum(function ($frais) {
                 return ($frais->type == 'Transport Achat') ? $frais->montant : 0; 
@@ -57,9 +58,17 @@ class Achat extends Model
      *
      * @return float
      */
-    public function getMontantTotalAchatAttribute() {
+    public function getMontantTotalAchatAttribute() 
+    {
         return $this->bovins->sum(function($bovin) {
             return $bovin->prix; 
         });
+    }
+
+    public function getTransportAttribute()
+    {
+        return (isset($this->bovins[0]) && !is_null($this->bovins[0])) 
+            ? $this->bovins()->with('bovinTransports')->first()->bovinTransports->first()->transport 
+            : null;
     }
 }

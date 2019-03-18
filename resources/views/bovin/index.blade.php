@@ -50,6 +50,7 @@
                                 <th>Age Initial</th>
                                 <th>Origine</th>
                                 <th>Statut</th>
+                                <th>Prix d'achat</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -62,7 +63,9 @@
                                     <td>{{ $bovin->age_initial }}</td>
                                     <td>{{ $bovin->origine }}</td>
                                     <td> <span class="label bg-green">{{ $bovin->statut }}</span></td>
+                                    <td>{{ numberToPriceFormat($bovin->prix) }}</td>
                                     <td class="td-actions">
+                                        <a href="{{ route('achat.show', ['id' => $bovin->achat_id]) }}" class="btn green-haze btn-sm uppercase"><i class="fa fa-eye"></i> Achat</a>
                                         <a href="{{ route('bovin.edit', ['id' => $bovin->id]) }}" class="btn green-haze btn-sm uppercase"><i class="fa fa-edit"></i></a>
                                         <a href="{{ route('bovin.edit', ['id' => $bovin->id]) }}" class="btn red-haze btn-sm uppercase"><i class="fa fa-trash-o"></i></a>
                                     </td>

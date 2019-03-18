@@ -19,13 +19,13 @@ class BovinTransport extends Model
      * @var array
      */
     protected $fillable = ['bovin_id', 'transport_id', 'created_at', 'updated_at'];
-
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function bovin()
     {
-        return $this->belongsTo(Bovin::class; 'bovin_id');
+        return $this->belongsTo(Bovin::class, 'bovin_id');
     }
 
     /**

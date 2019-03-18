@@ -95,7 +95,10 @@ class AchatController extends Controller
      */
     public function show($id)
     {
-        //
+        $achat = Achat::findOrFail($id);
+        return view('achat.show', [
+            'achat' => $achat
+        ]);
     }
 
     /**

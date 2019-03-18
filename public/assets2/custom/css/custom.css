@@ -86,3 +86,18 @@ body.swal2-shown {
     background: #fff;
     margin-top: 10px;
 }
+
+.dashboard-stat2 {
+    padding: 25px 15px 25px;
+}
+
+.dashboard-stat2 .display {
+    margin-bottom: 0px;
+}
+
+.dashboard-stat2 .display .number h3 {
+    margin: 0 0 8px;
+    padding: 0;
+    font-size: 30px;
+    font-weight: 400;
+}
