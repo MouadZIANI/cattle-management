@@ -1,5 +1,12 @@
 <?php
 
+use App\Models\Fournisseur;
+use App\Models\BovinTransport;
+use App\Models\Transport;
+use App\Models\Bovin;
+use App\Models\Frais;
+use App\Models\Achat;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,7 +17,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+Route::resource('achat', 'AchatController');
+Route::resource('fournisseur', 'FournisseurController');
+Route::resource('bovin', 'BovinController');
+Route::get('total', function () {
+	foreach (Achat::all() as $key => $achat) {
+		dump($achat->montantTotalTransportAchat);
+	}
 });

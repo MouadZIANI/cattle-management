@@ -75,9 +75,9 @@ class Bovin extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function transports()
+    public function bovinTransports()
     {
-        return $this->hasMany(Transport::class, 'bovin_id');
+        return $this->hasMany(BovinTransport::class, 'bovin_id');
     }
 
     /**

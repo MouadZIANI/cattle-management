@@ -1,0 +1,88 @@
+.dashboard-stat {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+.box>.portlet-title>.actions .btn-icon-only.btn-default.fullscreen {
+    padding-top: 7px !important;
+}
+
+.page-sidebar .page-sidebar-menu>li, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li {
+    border-top: 1px solid #484848;
+}
+
+.page-sidebar .heading {
+    border: 0px !important;
+}
+
+.btn-new {
+	padding-left: 0px;
+}
+
+.swal2-modal .swal2-buttonswrapper.swal2-loading .swal2-styled.swal2-confirm {
+    border-radius: 50% !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+    border-radius: 50% !important;
+}
+
+.swal2-icon {
+	border-radius: 50% !important;
+}
+
+.fc-v-event {
+	margin: 2px !important;
+}
+
+body.swal2-shown {
+	overflow-y:auto !important
+}
+
+.swal2-popup {
+    font-family: "Open Sans", sans-serif;
+}
+
+.modal.in .modal-dialog {
+    -webkit-transform: translate(0, calc(45vh - 45%));
+    -ms-transform: translate(0, 45vh) translate(0, -45%);
+    -o-transform: translate(0, calc(45vh - 45%));
+    transform: translate(0, 45vh) translate(0, -45%);
+}
+.modal .modal-header .close {
+    margin-top: 8px !important;
+}
+
+.mt-actions .mt-action .mt-action-img>img {
+    width: 50px !important;
+    height: 50px !important;
+}
+.mt-widget-1 {
+	margin-bottom: 10px;
+}
+
+.mt-widget-1 .mt-img {
+    margin: 20px 0 15px;
+}
+.mt-widget-1 .mt-img img {
+    width: 100px;
+    height: 100px;
+}
+
+.table-show-details {
+    margin-bottom: 0px !important;
+}
+
+.table-show-details td {
+    vertical-align: middle !important;
+}
+
+.table-show-details th {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    min-width: 130px !important;
+}
+
+.mt-widget-1 {
+    background: #fff;
+    margin-top: 10px;
+}

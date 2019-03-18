@@ -20,8 +20,6 @@ class CreateTransportsTable extends Migration
             $table->string('nom_chaffeur', 50)->nullable();
             $table->string('matricule', 50)->nullable();
             $table->string('tel', 50)->nullable();
-            $table->integer('bovin_id')->unsigned()->nullable();
-            $table->foreign('bovin_id')->references('id')->on('bovins')->onDelete('cascade');
             $table->timestamps();
         });
     }

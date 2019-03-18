@@ -21,6 +21,8 @@ class Achat extends Model
      */
     protected $fillable = ['fournisseur_id', 'date_achat', 'observation', 'created_at', 'updated_at'];
 
+    protected $with = ['fournisseur'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -34,6 +36,30 @@ class Achat extends Model
      */
     public function bovins()
     {
-        return $this->hasMany(Bovin::class, 'bovin_id');
+        return $this->hasMany(Bovin::class, 'achat_id');
+    }
+
+    /**
+     * Get montant total achat
+     *
+     * @return float
+     */
+    public function getMontantTotalTransportAchatAttribute() {
+        return $this->bovins->sum(function($bovin) {
+            return $bovin->frais->sum(function ($frais) {
+                return ($frais->type == 'Transport Achat') ? $frais->montant : 0; 
+            });
+        });
+    }
+
+    /**
+     * Get montant total achat
+     *
+     * @return float
+     */
+    public function getMontantTotalAchatAttribute() {
+        return $this->bovins->sum(function($bovin) {
+            return $bovin->prix; 
+        });
     }
 }

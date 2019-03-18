@@ -21,13 +21,13 @@ class Transport extends Model
     /**
      * @var array
      */
-    protected $fillable = ['bovin_id', 'type', 'date', 'nom_chaffeur', 'matricule', 'tel', 'created_at', 'updated_at'];
+    protected $fillable = ['type', 'date', 'nom_chaffeur', 'matricule', 'tel', 'created_at', 'updated_at'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function bovin()
+    public function bovinTransports()
     {
-        return $this->belongsTo(Bovin::class, 'bovin_id');
+        return $this->hasMany(BovinTransport::class, 'bovin_id');
     }
 }
