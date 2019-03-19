@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Nouveau achat')
+@section('title', 'Nouvelle achat')
 
 @section('content')
 <div class="page-content">
@@ -13,14 +13,14 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span>Nouveau achat</span>
+                <span>Nouvelle achat</span>
             </li>
         </ul>
     </div>
     <!-- END PAGE BAR -->
     <!-- BEGIN PAGE TITLE-->
     <h1 class="page-title"> 
-        Nouveau achat
+        Nouvelle achat
         <small class="pull-right">
             <a class="btn red btn-md" href="{{ route('achat.index') }}" target="_self">
                 <i class="fa fa-plus"></i> &nbsp; Liste des acahts

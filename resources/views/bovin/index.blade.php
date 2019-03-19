@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered dataTable">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -65,7 +65,8 @@
                                     <td> <span class="label bg-green">{{ $bovin->statut }}</span></td>
                                     <td>{{ numberToPriceFormat($bovin->prix) }}</td>
                                     <td class="td-actions">
-                                        <a href="{{ route('achat.show', ['id' => $bovin->achat_id]) }}" class="btn green-haze btn-sm uppercase"><i class="fa fa-eye"></i> Achat</a>
+                                        <a href="{{ route('achat.show', ['id' => $bovin->achat_id]) }}" class="btn yellow btn-sm uppercase">Achat</a>
+                                        <a href="{{ route('bovin.show', ['id' => $bovin->id]) }}" class="btn blue btn-sm uppercase">Details</a>
                                         <a href="{{ route('bovin.edit', ['id' => $bovin->id]) }}" class="btn green-haze btn-sm uppercase"><i class="fa fa-edit"></i></a>
                                         <a href="{{ route('bovin.edit', ['id' => $bovin->id]) }}" class="btn red-haze btn-sm uppercase"><i class="fa fa-trash-o"></i></a>
                                     </td>
@@ -96,6 +97,7 @@
         $(document).ready(function () {
             // init 
             $('.dataTable').dataTable({
+                "pageLength": 50,
                 "language": {
                     "aria": {
                         "sortAscending": ": activate to sort column ascending",

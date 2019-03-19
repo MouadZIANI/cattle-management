@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered dataTable">
                         <thead>
                             <tr>
                                 <th>Fournisseur</th>
@@ -49,7 +49,7 @@
                                 <th>Nb Bovins</th>
                                 <th>Montant total transport</th>
                                 <th>Montant total</th>
-                                <th>observation</th>
+                                <th>Bovins</th>
                                 <th>actions</th>
                             </tr>
                         </thead>
@@ -61,9 +61,11 @@
                                     <td>{{ count($achat->bovins) }}</td>
                                     <td>{{ numberToPriceFormat($achat->montantTotalTransportAchat) }}</td>
                                     <td>{{ numberToPriceFormat($achat->montantTotalAchat) }}</td>
-                                    <td>{{ $achat->observation }}</td>
+                                    <td>
+                                        <a href="{{ route('achat.show', ['id' => $achat->id]) }}" class="btn yellow btn-sm uppercase">consulter</a>
+                                    </td>
                                     <td class="td-actions">
-                                        <a href="{{ route('achat.show', ['id' => $achat->id]) }}" class="btn blue btn-sm uppercase"><i class="fa fa-eye"></i></a>
+                                        <a href="{{ route('achat.show', ['id' => $achat->id]) }}" class="btn blue btn-sm uppercase">Details</a>
                                         <a href="{{ route('achat.edit', ['id' => $achat->id]) }}" class="btn green-haze btn-sm uppercase"><i class="fa fa-edit"></i></a>
                                         <a href="{{ route('achat.edit', ['id' => $achat->id]) }}" class="btn red-haze btn-sm uppercase"><i class="fa fa-trash-o"></i></a>
                                     </td>

@@ -23,6 +23,7 @@ Route::resource('fournisseur', 'FournisseurController');
 Route::resource('bovin', 'BovinController');
 Route::resource('visite', 'VisiteController');
 Route::resource('veterinaire', 'VeterinaireController');
+Route::resource('stock', 'VeterinaireController');
 Route::get('total', function () {
 	foreach (Achat::all() as $key => $achat) {
 		dump($achat->montantTotalTransportAchat);

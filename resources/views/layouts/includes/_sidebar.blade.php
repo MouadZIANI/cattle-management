@@ -61,6 +61,90 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item start {{ (Request::is(getUrlFromRoute('visite.index')) || Request::is(getUrlFromRoute('visite.create'))) ? 'active open' : '' }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">Bovins</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item start {{ Request::is(getUrlFromRoute('visite.index')) ? 'active' : '' }}">
+                        <a href="{{ route('visite.index') }}" class="nav-link ">
+                            <i class="icon-user"></i>
+                            <span class="title">Liste des visites</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start {{ Request::is(getUrlFromRoute('visite.create')) ? 'active' : '' }}">
+                        <a href="{{ route('visite.create') }}" class="nav-link ">
+                            <i class="icon-plus"></i>
+                            <span class="title">Nouveau visite</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item start {{ (Request::is(getUrlFromRoute('veterinaire.index')) || Request::is(getUrlFromRoute('veterinaire.create'))) ? 'active open' : '' }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">Veterinaire</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item start {{ Request::is(getUrlFromRoute('veterinaire.index')) ? 'active' : '' }}">
+                        <a href="{{ route('veterinaire.index') }}" class="nav-link ">
+                            <i class="icon-user"></i>
+                            <span class="title">Liste des veterinaires</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start {{ Request::is(getUrlFromRoute('veterinaire.create')) ? 'active' : '' }}">
+                        <a href="{{ route('veterinaire.create') }}" class="nav-link ">
+                            <i class="icon-plus"></i>
+                            <span class="title">Nouveau veterinaire</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item start {{ (Request::is(getUrlFromRoute('fournisseur.index')) || Request::is(getUrlFromRoute('fournisseur.create'))) ? 'active open' : '' }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">Fournisseurs</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item start {{ Request::is(getUrlFromRoute('fournisseur.index')) ? 'active' : '' }}">
+                        <a href="{{ route('fournisseur.index') }}" class="nav-link ">
+                            <i class="icon-user"></i>
+                            <span class="title">Liste des fournisseurs</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start {{ Request::is(getUrlFromRoute('fournisseur.create')) ? 'active' : '' }}">
+                        <a href="{{ route('fournisseur.create') }}" class="nav-link ">
+                            <i class="icon-plus"></i>
+                            <span class="title">Nouveau fournisseur</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item start {{ (Request::is(getUrlFromRoute('stock.index')) || Request::is(getUrlFromRoute('stock.create'))) ? 'active open' : '' }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">Gestion du stock</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item start {{ Request::is(getUrlFromRoute('stock.index')) ? 'active' : '' }}">
+                        <a href="{{ route('stock.index') }}" class="nav-link ">
+                            <i class="icon-user"></i>
+                            <span class="title">Stocks</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start {{ Request::is(getUrlFromRoute('stock.create')) ? 'active' : '' }}">
+                        <a href="{{ route('stock.create') }}" class="nav-link ">
+                            <i class="icon-plus"></i>
+                            <span class="title">Ajouter element au stock</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <!-- END SIDEBAR MENU -->
         <!-- END SIDEBAR MENU -->

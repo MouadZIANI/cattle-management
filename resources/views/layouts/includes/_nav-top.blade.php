@@ -4,7 +4,7 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo">
             <a href="#">
-                <h4 class="brand-header"><span class="text-white">Innov-</span><span class="text-red">Solution</span></h4> 
+                <h4 class="brand-header"><span class="text-white">Cattle-</span><span class="text-red">Manager</span></h4> 
             </a>
         </div>
         <!-- END LOGO -->

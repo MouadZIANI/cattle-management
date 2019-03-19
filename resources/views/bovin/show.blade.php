@@ -78,7 +78,7 @@
                     </li>
                     <li class="list-group-item"> 
                     	Prix achat
-                        <span class="text-primary pull-right">{{ numberToPriceFormat($bovin->achat->prix) }}</span>
+                        <span class="text-primary pull-right">{{ numberToPriceFormat($bovin->prix) }}</span>
                     </li>
                 </ul>
             </div>
