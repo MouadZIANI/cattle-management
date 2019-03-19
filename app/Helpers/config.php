@@ -9,3 +9,11 @@ if (!function_exists("getStatusBovin")) {
 		];	
 	}
 }
+if (!function_exists("getElementStockType")) {
+	function getElementStockType() {
+		return [
+			'Medicaments' => 'Medicaments',
+			'Norritures' => 'Norritures',
+		];	
+	}
+}
