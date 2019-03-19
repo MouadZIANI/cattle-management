@@ -7,32 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property int $bovin_id
- * @property int $transport_id
  * @property string $created_at
  * @property string $updated_at
+ * @property string $type
+ * @property string $date
+ * @property string $observation
  * @property Bovin $bovin
- * @property Transport $transport
  */
-class BovinTransport extends Model
+class Pert extends Model
 {
     /**
      * @var array
      */
-    protected $fillable = ['bovin_id', 'transport_id', 'created_at', 'updated_at'];
-    
+    protected $fillable = ['bovin_id', 'created_at', 'updated_at', 'type', 'date', 'observation'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function bovin()
     {
         return $this->belongsTo(Bovin::class, 'bovin_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function transport()
-    {
-        return $this->belongsTo(Transport::class, 'transport_id');
     }
 }
