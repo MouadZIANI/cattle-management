@@ -29,7 +29,10 @@ class BovinController extends Controller
      */
     public function show($id)
     {
-        //
+        $bovin = Bovin::find($id);
+        return view('bovin.show', [
+            'bovin' => $bovin
+        ]);
     }
 
     /**

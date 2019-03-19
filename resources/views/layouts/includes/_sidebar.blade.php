@@ -35,7 +35,7 @@
                     <li class="nav-item start {{ Request::is(getUrlFromRoute('achat.create')) ? 'active' : '' }}">
                         <a href="{{ route('achat.create') }}" class="nav-link ">
                             <i class="icon-plus"></i>
-                            <span class="title">Nouveau client</span>
+                            <span class="title">Nouvelle achat</span>
                         </a>
                     </li>
                 </ul>

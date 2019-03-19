@@ -63,6 +63,7 @@
                                     <td>{{ numberToPriceFormat($achat->montantTotalAchat) }}</td>
                                     <td>{{ $achat->observation }}</td>
                                     <td class="td-actions">
+                                        <a href="{{ route('achat.show', ['id' => $achat->id]) }}" class="btn blue btn-sm uppercase"><i class="fa fa-eye"></i></a>
                                         <a href="{{ route('achat.edit', ['id' => $achat->id]) }}" class="btn green-haze btn-sm uppercase"><i class="fa fa-edit"></i></a>
                                         <a href="{{ route('achat.edit', ['id' => $achat->id]) }}" class="btn red-haze btn-sm uppercase"><i class="fa fa-trash-o"></i></a>
                                     </td>
