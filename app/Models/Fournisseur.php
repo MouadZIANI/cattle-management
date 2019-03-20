@@ -18,7 +18,7 @@ class Fournisseur extends Model
 {
     /**
      * @var array
-     */
+     */ 
     protected $fillable = ['nom', 'tel', 'email', 'adresse', 'created_at', 'updated_at'];
 
     /**

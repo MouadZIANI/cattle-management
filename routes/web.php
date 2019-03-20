@@ -20,6 +20,7 @@ use App\Models\Achat;
 Auth::routes();
 Route::resource('achat', 'AchatController');
 Route::resource('fournisseur', 'FournisseurController');
+Route::resource('pert', 'PertController');
 Route::resource('bovin', 'BovinController');
 Route::resource('visite', 'VisiteController');
 Route::resource('veterinaire', 'VeterinaireController');

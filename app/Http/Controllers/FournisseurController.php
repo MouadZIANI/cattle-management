@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Fournisseur;
 class FournisseurController extends Controller
 {
     /**
@@ -13,7 +13,9 @@ class FournisseurController extends Controller
      */
     public function index()
     {
-        //
+        return view('fournisseur.index', [
+            'fournisseurs' => Fournisseur::all()
+        ]);
     }
 
     /**
@@ -23,7 +25,7 @@ class FournisseurController extends Controller
      */
     public function create()
     {
-        //
+        return view('fournisseur.create');
     }
 
     /**
@@ -34,7 +36,15 @@ class FournisseurController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fournisseur = new Fournisseur();
+        $fournisseur->nom = $request->input('nome');
+        $fournisseur->tel = $request->input('telephone');
+        $fournisseur->email = $request->input('email');
+        $fournisseur->adresse = $request->input('adresse');
+        $fournisseur->save();
+
+        session()->flash('success', 'Fournisseur à été enregistré avec succès !');
+        return redirect()->route('fournisseur.create');
     }
 
     /**
@@ -45,7 +55,10 @@ class FournisseurController extends Controller
      */
     public function show($id)
     {
-        //
+        $fournisseur = Fournisseur::findOrFail($id);
+        return view('fournisseur.show', [
+            'fournisseur' => $fournisseur
+        ]);
     }
 
     /**
@@ -56,7 +69,9 @@ class FournisseurController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('fournisseur.edit', [
+            'fournisseur' => Fournisseur::find($id)
+        ]);
     }
 
     /**
@@ -68,7 +83,15 @@ class FournisseurController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $fournisseur = Fournisseur::find($id);
+        $fournisseur->nom = $request->input('nome');
+        $fournisseur->tel = $request->input('telephone');
+        $fournisseur->email = $request->input('email');
+        $fournisseur->adresse = $request->input('adresse');
+        $fournisseur->save();
+
+        session()->flash('success', 'Fournisseur à été Modifier avec succès !');
+        return redirect()->route('fournisseur.index');
     }
 
     /**
@@ -79,6 +102,11 @@ class FournisseurController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fournisseur = Fournisseur::find($id);
+        
+        $fournisseur->delete();
+
+        session()->flash('success', 'Fournisseur à été sup avec succès !');
+        return redirect()->route('fournisseur.index');
     }
 }

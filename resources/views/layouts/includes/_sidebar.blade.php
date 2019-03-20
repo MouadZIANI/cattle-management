@@ -103,6 +103,28 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item start {{ (Request::is(getUrlFromRoute('veterinaire.index')) || Request::is(getUrlFromRoute('veterinaire.create'))) ? 'active open' : '' }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">Pert</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item start {{ Request::is(getUrlFromRoute('pert.index')) ? 'active' : '' }}">
+                        <a href="{{ route('pert.index') }}" class="nav-link ">
+                            <i class="icon-user"></i>
+                            <span class="title">Liste des Pert</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start {{ Request::is(getUrlFromRoute('pert.create')) ? 'active' : '' }}">
+                        <a href="{{ route('pert.create') }}" class="nav-link ">
+                            <i class="icon-plus"></i>
+                            <span class="title">Nouveau pert</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="nav-item start {{ (Request::is(getUrlFromRoute('fournisseur.index')) || Request::is(getUrlFromRoute('fournisseur.create'))) ? 'active open' : '' }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-users"></i>
