@@ -15,10 +15,6 @@ class CreatePertsTable extends Migration
     {
         Schema::create('perts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type', 50)->nullable();
-            $table-date('date')->nullable();
-            $table-text('observation');
-            $table->integer('bovin_id')->reference('id')->on('bovins')->after('id');
             $table->timestamps();
         });
     }

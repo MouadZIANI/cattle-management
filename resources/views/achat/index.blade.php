@@ -49,8 +49,8 @@
                                 <th>Nb Bovins</th>
                                 <th>Montant total transport</th>
                                 <th>Montant total</th>
-                                <th>Bovins</th>
-                                <th>actions</th>
+                                <th>#</th>
+                                {{-- <th>actions</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -63,12 +63,12 @@
                                     <td>{{ numberToPriceFormat($achat->montantTotalAchat) }}</td>
                                     <td>
                                         <a href="{{ route('achat.show', ['id' => $achat->id]) }}" class="btn yellow btn-sm uppercase">consulter</a>
-                                    </td>
-                                    <td class="td-actions">
                                         <a href="{{ route('achat.show', ['id' => $achat->id]) }}" class="btn blue btn-sm uppercase">Details</a>
+                                    </td>
+                                    {{-- <td class="td-actions">
                                         <a href="{{ route('achat.edit', ['id' => $achat->id]) }}" class="btn green-haze btn-sm uppercase"><i class="fa fa-edit"></i></a>
                                         <a href="{{ route('achat.edit', ['id' => $achat->id]) }}" class="btn red-haze btn-sm uppercase"><i class="fa fa-trash-o"></i></a>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>

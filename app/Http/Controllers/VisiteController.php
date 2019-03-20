@@ -41,7 +41,32 @@ class VisiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // foreach ($request->bovin as $key => $bovin) {
+        //     $visite = Visite::create([
+        //         'bovin_id' $request->bovin[$key], 
+        //         'veterinaire_id' => $request->veterinaire_id[$key], 
+        //         'type' => $request->type[$key], 
+        //         'date' => $request->date[$key], 
+        //         'prix' => $request->prix[$key], 
+        //         'observation' => $request->observation[$key]
+        //     ]);
+        //     Frais::create([
+        //         'bovin_id' => $visite->bovin_id, 
+        //         'type' => 'Visite', 
+        //         'montant' => $request->prix[$key], 
+        //         'date' => $request->date, 
+        //         'observation' => 'Visite du bovin', 
+        //         'model_id' => $visite->id
+        //     ]);
+        //     Ordonnance::create([
+        //         'medicament_id', 
+        //         'visite_id' => $request->visite_id[$key], 
+        //         'qte' => $request->qte[$key], 
+        //         'posologie' => $request->posologie[$key], 
+        //         'date' => $request->date[$key]
+        //     ]);
+        // }
+        // dd($request->all());
     }
 
     /**

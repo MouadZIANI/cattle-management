@@ -14,7 +14,7 @@ class AddColumnPrixStockElements extends Migration
     public function up()
     {
         Schema::table('stock_elements', function (Blueprint $table) {
-            $table->float('prix')->after('qte');
+            $table->float('prix')->nullable();
         });
     }
 

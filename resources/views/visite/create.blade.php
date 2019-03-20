@@ -114,7 +114,7 @@
                                 </td>
                                 <td>
                                     <button data-table-id="1" type="button" class="add-ordonnace btn btn-warning">Ajouter une ordannace</button>
-                                    <table class="table table-bordered table-striped ordonnance-table hide" id="ordonnance-table-1"> <tr> <th>Medicament</th> <th>Qte</th> <th>Posologie</th> <th> <button class="btn btn-sm green" type="button"><i class="fa fa-plus"></i></button> </th> </tr> <tr> <td> <select name="medicament[]" class="form-control"> @foreach ($medicaments as $medicament) <option value="{{ $medicament->id }}">{{ $medicament->designation }}</option> @endforeach </select> </td> <td> <input type="text" class="form-control" name="qte[]" placeholder="Qte"> </td> <td> <input type="text" class="form-control" name="posologie[]" placeholder="Posologie"> </td> <td> <button class="btn btn-danger btn-sm btn-remove-row" type="button"><i class="fa fa-close"></i></button> </td> </tr> </table>
+                                    <table class="table table-bordered table-striped ordonnance-table hide" id="ordonnance-table-1"> <tr> <th>Medicament</th> <th>Qte</th> <th>Posologie</th> <th> <button class="btn btn-sm green add-row" type="button"><i class="fa fa-plus"></i></button> </th> </tr> <tr> <td> <select name="medicament[1][]" class="form-control"> @foreach ($medicaments as $medicament) <option value="{{ $medicament->id }}">{{ $medicament->designation }}</option> @endforeach </select> </td> <td> <input type="text" class="form-control" name="qte[1][]" placeholder="Qte"> </td> <td> <input type="text" class="form-control" name="posologie[1][]" placeholder="Posologie"> </td> <td> <button class="btn btn-danger btn-sm btn-remove-row" type="button"><i class="fa fa-close"></i></button> </td> </tr> </table>
                                 </td>
                                 <td>
                                     <select name="statut[]" class="form-control" id="statut">
@@ -163,7 +163,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn dark btn-outline" data-dismiss="modal">Annuler</button>
-                <button type="button" class="btn green">Enregister</button>
+                <button type="button" class="btn green" id="save-ordonnance">Enregister</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -176,16 +176,13 @@
 @section('custom-javascripts')
     <script>
         $(document).ready(function () {
+            // Init
+            var selectedId = 1;
             // Events
             $('#add-row-to-bovin-table').click(function () {
                 var UID = uid();
-                var row = '<tr><td> <select name="bovin[]" class="form-control"> @foreach($bovins as $key => $bovin) <option value="{{ $bovin->id }}">{{ $bovin->num }}</option> @endforeach </select></td><td> <button data-table-id="' + UID + '" type="button" class="add-ordonnace btn btn-warning">Ajouter une ordannace</button> <table class="table table-bordered table-striped ordonnance-table hide" id="ordonnance-table-' + UID + '"> <tr> <th>Medicament</th> <th>Qte</th> <th>Posologie</th> <th> <button class="btn btn-sm green" type="button"><i class="fa fa-plus"></i></button> </th> </tr> <tr> <td> <select name="medicament[]" class="form-control"> @foreach ($medicaments as $medicament) <option value="{{ $medicament->id }}">{{ $medicament->designation }}</option> @endforeach </select> </td> <td> <input type="text" class="form-control" name="qte[]" placeholder="Qte"> </td> <td> <input type="text" class="form-control" name="posologie[]" placeholder="Posologie"> </td> <td> <button class="btn btn-danger btn-sm btn-remove-row" type="button"><i class="fa fa-close"></i></button> </td> </tr> </table></td><td> <select name="statut[]" class="form-control" id="statut"> @foreach(getStatusBovin() as $key => $statut) <option value="{{ $statut }}">{{ $statut }}</option> @endforeach </select></td><td> <textarea name="observation[]" cols="30" rows="3" class="form-control" placeholder="Prix d\'achat"></textarea></td><td> <button class="btn btn-danger btn-remove-row" type="button"><i class="fa fa-close"></i></button></td></tr>';
+                var row = '<tr><td> <select name="bovin[]" class="form-control"> @foreach($bovins as $key => $bovin) <option value="{{ $bovin->id }}">{{ $bovin->num }}</option> @endforeach </select></td><td> <button data-table-id="' + UID + '" type="button" class="add-ordonnace btn btn-warning">Ajouter une ordannace</button> <table class="table table-bordered table-striped ordonnance-table hide" id="ordonnance-table-' + UID + '"> <tr> <th>Medicament</th> <th>Qte</th> <th>Posologie</th> <th> <button class="btn btn-sm green add-row" type="button"><i class="fa fa-plus"></i></button> </th> </tr> <tr> <td> <select name="medicament[' + UID + '][]" class="form-control"> @foreach ($medicaments as $medicament) <option value="{{ $medicament->id }}">{{ $medicament->designation }}</option> @endforeach </select> </td> <td> <input type="text" class="form-control" name="qte[' + UID + '][]" placeholder="Qte"> </td> <td> <input type="text" class="form-control" name="posologie[' + UID + '][]" placeholder="Posologie"> </td> <td> <button class="btn btn-danger btn-sm btn-remove-row" type="button"><i class="fa fa-close"></i></button> </td> </tr> </table></td><td> <select name="statut[]" class="form-control" id="statut"> @foreach(getStatusBovin() as $key => $statut) <option value="{{ $statut }}">{{ $statut }}</option> @endforeach </select></td><td> <textarea name="observation[]" cols="30" rows="3" class="form-control" placeholder="Prix d\'achat"></textarea></td><td> <button class="btn btn-danger btn-remove-row" type="button"><i class="fa fa-close"></i></button></td></tr>';
                 $('#bovin-table').append(row);
-            });
-
-            $('#add-row-to-ordonnance-table').click(function () {
-                var row = '<tr><td> <select name="medicament[]" class="form-control"> @foreach ($medicaments as $medicament) <option value="{{ $medicament->id }}">{{ $medicament->designation }}</option> @endforeach </select> </td> <td> <input type="text" class="form-control" name="qte[]" placeholder="Qte"> </td> <td> <input type="text" class="form-control" name="posologie[]" placeholder="Posologie"> </td> <td> <button class="btn btn-danger btn-sm btn-remove-row" type="button"><i class="fa fa-close"></i></button> </td></tr>';
-                $('#ordonnance-table').append(row);
             });
 
             $('body').on("click", ".btn-remove-row", function(e) {
@@ -193,14 +190,22 @@
             });
 
             $('body').on("click", ".add-ordonnace", function(e) {
-                var content = $('#ordonnance-table-' + $(this).data('table-id')).css('display', 'block').clone();
-                $('#modal-add-ordonnance #content').html(content);
+                selectedId = $(this).data('table-id');
+                var content = $('#ordonnance-table-' + selectedId).clone();
+                $('#modal-add-ordonnance #content').html(content.removeClass('hide'));
                 $('#modal-add-ordonnance').modal();
             });
 
-            // $('body').on("click", ".btn-remove-row", function(e) {
-            //     $(this).parent().parent().remove();
-            // });
+            $('body').on("click", ".add-row", function(e) {
+                var row = '<tr><td> <select name="medicament[' + selectedId + '][]" class="form-control"> @foreach ($medicaments as $medicament) <option value="{{ $medicament->id }}">{{ $medicament->designation }}</option> @endforeach </select> </td> <td> <input type="text" class="form-control" name="qte[' + selectedId + '][]" placeholder="Qte"> </td> <td> <input type="text" class="form-control" name="posologie[' + selectedId + '][]" placeholder="Posologie"> </td> <td> <button class="btn btn-danger btn-sm btn-remove-row" type="button"><i class="fa fa-close"></i></button> </td></tr>';
+                $(this).parent().parent().parent().parent().append(row);
+            });
+
+            $('#save-ordonnance').click(function () {
+                var content = $('#modal-add-ordonnance #content').clone();
+                $('#ordonnance-table-' + selectedId).replaceWith(content.addClass('hide'));
+                $('#modal-add-ordonnance').modal('hide');
+            });
 
             function uid() {
                 return '_' + Math.random().toString(36).substr(2, 9);
