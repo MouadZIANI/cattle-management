@@ -132,13 +132,13 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item start {{ Request::is(getUrlFromRoute('stock.index')) ? 'active' : '' }}">
-                        <a href="{{ route('stock.index') }}" class="nav-link ">
+                        <a href="{{ route('stockelement.index') }}" class="nav-link ">
                             <i class="icon-user"></i>
                             <span class="title">Stocks</span>
                         </a>
                     </li>
                     <li class="nav-item start {{ Request::is(getUrlFromRoute('stock.create')) ? 'active' : '' }}">
-                        <a href="{{ route('stock.create') }}" class="nav-link ">
+                        <a href="{{ route('stockelement.create') }}" class="nav-link ">
                             <i class="icon-plus"></i>
                             <span class="title">Ajouter element au stock</span>
                         </a>

@@ -19,7 +19,7 @@ class StockElement extends Model
     /**
      * @var array
      */
-    protected $fillable = ['designation', 'type', 'qte', 'created_at', 'updated_at'];
+    protected $fillable = ['designation', 'type', 'qte','prix','created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -35,5 +35,13 @@ class StockElement extends Model
     public function ordonnances()
     {
         return $this->hasMany(Ordonnance::class, 'medicament_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function frais()
+    {
+        return $this->hasOne(Frais::class, 'model_id');
     }
 }
