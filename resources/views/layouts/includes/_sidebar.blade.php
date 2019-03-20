@@ -64,7 +64,7 @@
             <li class="nav-item start {{ (Request::is(getUrlFromRoute('visite.index')) || Request::is(getUrlFromRoute('visite.create'))) ? 'active open' : '' }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-users"></i>
-                    <span class="title">Bovins</span>
+                    <span class="title">Visites</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
@@ -77,7 +77,7 @@
                     <li class="nav-item start {{ Request::is(getUrlFromRoute('visite.create')) ? 'active' : '' }}">
                         <a href="{{ route('visite.create') }}" class="nav-link ">
                             <i class="icon-plus"></i>
-                            <span class="title">Nouveau visite</span>
+                            <span class="title">Nouvelle visite</span>
                         </a>
                     </li>
                 </ul>

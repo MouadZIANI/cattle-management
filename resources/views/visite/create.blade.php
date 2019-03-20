@@ -98,8 +98,8 @@
                             <tr>
                                 <th>Num Bovin</th>
                                 <th>Ordonnance</th>
-                                <th>Observation</th>
                                 <th>Statut</th>
+                                <th>Observation</th>
                                 <th>
                                     <button id="add-row-to-bovin-table" type="button" class="btn green"><i class="fa fa-plus"></i></button>
                                 </th>
@@ -113,7 +113,8 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <a data-toggle="modal" href="#basic" class="add-ordonnace btn btn-warning">Ajouter une ordannace</a>
+                                    <button data-table-id="1" type="button" class="add-ordonnace btn btn-warning">Ajouter une ordannace</button>
+                                    <table class="table table-bordered table-striped ordonnance-table hide" id="ordonnance-table-1"> <tr> <th>Medicament</th> <th>Qte</th> <th>Posologie</th> <th> <button class="btn btn-sm green" type="button"><i class="fa fa-plus"></i></button> </th> </tr> <tr> <td> <select name="medicament[]" class="form-control"> @foreach ($medicaments as $medicament) <option value="{{ $medicament->id }}">{{ $medicament->designation }}</option> @endforeach </select> </td> <td> <input type="text" class="form-control" name="qte[]" placeholder="Qte"> </td> <td> <input type="text" class="form-control" name="posologie[]" placeholder="Posologie"> </td> <td> <button class="btn btn-danger btn-sm btn-remove-row" type="button"><i class="fa fa-close"></i></button> </td> </tr> </table>
                                 </td>
                                 <td>
                                     <select name="statut[]" class="form-control" id="statut">
@@ -130,6 +131,7 @@
                                 </td>
                             </tr>
                         </table>
+                        <div id="bovin-ordonnaces"></div>
                         <hr>
                         <div class="form-group{{ $errors->has('observation') ? ' has-error' : '' }}">
                             <label for="observation">Observation</label>
@@ -149,17 +151,19 @@
     </div>
 </div>
 {{-- Begin Modals --}}
-<div class="modal" id="basic" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal" id="modal-add-ordonnance" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Modal Title</h4>
+                <h4 class="modal-title">Ordonnance</h4>
             </div>
-            <div class="modal-body"> Modal body goes here </div>
+            <div class="modal-body">
+                <div id="content"></div>
+            </div>
             <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                <button type="button" class="btn green">Save changes</button>
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn green">Enregister</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -174,13 +178,33 @@
         $(document).ready(function () {
             // Events
             $('#add-row-to-bovin-table').click(function () {
-                var row = '<tr> <td> <input type="text" name="num[]" class="form-control" placeholder="Num"> </td> <td><select name="sexe[]" class="form-control" id="sexe"><option value="H">H</option><option value="F">F</option></select></td> <td> <input type="text" name="origine[]" class="form-control" placeholder="Origine"> </td> <td> <input type="text" name="poids_initial[]" class="form-control" placeholder="Poids initial"> </td> <td> <input type="text" name="age[]" class="form-control" placeholder="Age"> </td> <td><input type="text" name="prix[]" class="form-control" placeholder="Prix d\'achat"> </td> <td> <select name="statut[]" class="form-control" id="statut"> @foreach(getStatusBovin() as $key => $statut) <option value="{{ $statut }}">{{ $statut }}</option> @endforeach </select> </td> <td> <button class="btn btn-danger btn-remove-row" type="button"><i class="fa fa-close"></i></button> </td> </tr>';
+                var UID = uid();
+                var row = '<tr><td> <select name="bovin[]" class="form-control"> @foreach($bovins as $key => $bovin) <option value="{{ $bovin->id }}">{{ $bovin->num }}</option> @endforeach </select></td><td> <button data-table-id="' + UID + '" type="button" class="add-ordonnace btn btn-warning">Ajouter une ordannace</button> <table class="table table-bordered table-striped ordonnance-table hide" id="ordonnance-table-' + UID + '"> <tr> <th>Medicament</th> <th>Qte</th> <th>Posologie</th> <th> <button class="btn btn-sm green" type="button"><i class="fa fa-plus"></i></button> </th> </tr> <tr> <td> <select name="medicament[]" class="form-control"> @foreach ($medicaments as $medicament) <option value="{{ $medicament->id }}">{{ $medicament->designation }}</option> @endforeach </select> </td> <td> <input type="text" class="form-control" name="qte[]" placeholder="Qte"> </td> <td> <input type="text" class="form-control" name="posologie[]" placeholder="Posologie"> </td> <td> <button class="btn btn-danger btn-sm btn-remove-row" type="button"><i class="fa fa-close"></i></button> </td> </tr> </table></td><td> <select name="statut[]" class="form-control" id="statut"> @foreach(getStatusBovin() as $key => $statut) <option value="{{ $statut }}">{{ $statut }}</option> @endforeach </select></td><td> <textarea name="observation[]" cols="30" rows="3" class="form-control" placeholder="Prix d\'achat"></textarea></td><td> <button class="btn btn-danger btn-remove-row" type="button"><i class="fa fa-close"></i></button></td></tr>';
                 $('#bovin-table').append(row);
+            });
+
+            $('#add-row-to-ordonnance-table').click(function () {
+                var row = '<tr><td> <select name="medicament[]" class="form-control"> @foreach ($medicaments as $medicament) <option value="{{ $medicament->id }}">{{ $medicament->designation }}</option> @endforeach </select> </td> <td> <input type="text" class="form-control" name="qte[]" placeholder="Qte"> </td> <td> <input type="text" class="form-control" name="posologie[]" placeholder="Posologie"> </td> <td> <button class="btn btn-danger btn-sm btn-remove-row" type="button"><i class="fa fa-close"></i></button> </td></tr>';
+                $('#ordonnance-table').append(row);
             });
 
             $('body').on("click", ".btn-remove-row", function(e) {
                 $(this).parent().parent().remove();
             });
+
+            $('body').on("click", ".add-ordonnace", function(e) {
+                var content = $('#ordonnance-table-' + $(this).data('table-id')).css('display', 'block').clone();
+                $('#modal-add-ordonnance #content').html(content);
+                $('#modal-add-ordonnance').modal();
+            });
+
+            // $('body').on("click", ".btn-remove-row", function(e) {
+            //     $(this).parent().parent().remove();
+            // });
+
+            function uid() {
+                return '_' + Math.random().toString(36).substr(2, 9);
+            }
         })
     </script>
 @endsection

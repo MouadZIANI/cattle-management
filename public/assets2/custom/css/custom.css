@@ -101,3 +101,7 @@ body.swal2-shown {
     font-size: 30px;
     font-weight: 400;
 }
+
+.hide {
+    visibility: hidden;
+}

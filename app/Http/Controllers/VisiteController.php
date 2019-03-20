@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Veterinaire;
 use App\Models\Bovin;
+use App\Models\StockElement;
 
 class VisiteController extends Controller
 {
@@ -27,7 +28,8 @@ class VisiteController extends Controller
     {
         return view('visite.create', [
             'veterinaires' => Veterinaire::select('id', 'nom')->get(),
-            'bovins' => Bovin::select('id', 'num', 'statut')->get()
+            'bovins' => Bovin::select('id', 'num', 'statut')->get(),
+            'medicaments' => StockElement::where('type', 'medicament')->get()
         ]);
     }
 

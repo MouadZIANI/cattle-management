@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Veterinaire;
 
 class VeterinaireController extends Controller
 {
@@ -13,7 +14,9 @@ class VeterinaireController extends Controller
      */
     public function index()
     {
-        //
+        return view('veterinaire.index', [
+            'veterinaires' => Veterinaire::all()
+        ]);
     }
 
     /**
@@ -23,7 +26,7 @@ class VeterinaireController extends Controller
      */
     public function create()
     {
-        //
+        return view('veterinaire.create');
     }
 
     /**
@@ -34,7 +37,14 @@ class VeterinaireController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $veterinaire = new Veterinaire();
+        $veterinaire->nom = $request->input('nome');
+        $veterinaire->tel = $request->input('telephone');
+        $veterinaire->email = $request->input('email');
+        $veterinaire->save();
+
+        session()->flash('success', 'Veterinaire à été enregistré avec succès !');
+        return redirect()->route('veterinaire.create');
     }
 
     /**
@@ -45,7 +55,10 @@ class VeterinaireController extends Controller
      */
     public function show($id)
     {
-        //
+        $veterinaire = Veterinaire::findOrFail($id);
+        return view('veterinaire.show', [
+            'veterinaire' => $veterinaire
+        ]);
     }
 
     /**
@@ -56,7 +69,9 @@ class VeterinaireController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('veterinaire.edit', [
+            'veterinaire' => Veterinaire::find($id)
+        ]);
     }
 
     /**
@@ -68,7 +83,14 @@ class VeterinaireController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $veterinaire = Veterinaire::find($id);
+        $veterinaire->nom = $request->input('nome');
+        $veterinaire->tel = $request->input('telephone');
+        $veterinaire->email = $request->input('email');
+        $veterinaire->save();
+
+        session()->flash('success', 'Veterinaire à été modofier avec succès !');
+        return redirect()->route('veterinaire.index');
     }
 
     /**
@@ -79,6 +101,11 @@ class VeterinaireController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $veterinaire = Veterinaire::find($id);
+        
+        $veterinaire->delete();
+
+        session()->flash('success', 'Veterinaire à été sup avec succès !');
+        return redirect()->route('veterinaire.index');
     }
 }

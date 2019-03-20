@@ -1,6 +1,6 @@
 @extends('layouts.master')
- 
-@section('title', 'Liste des achats')
+
+@section('title', 'Liste des Veterinaire')
 
 @section('content')
 <div class="page-content">
@@ -13,17 +13,17 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span>liste des achats</span>
+                <span>liste des veterinaire</span>
             </li>
         </ul>
     </div>
     <!-- END PAGE BAR -->
     <!-- BEGIN PAGE TITLE-->
     <h1 class="page-title"> 
-        Liste des achats
+        Liste des veterinaire
         <small class="pull-right">
-            <a class="btn red btn-md" href="{{ route('achat.create') }}" target="_self">
-                <i class="fa fa-plus"></i> &nbsp;Nouvelle achat
+            <a class="btn red btn-md" href="{{ route('veterinaire.create') }}" target="_self">
+                <i class="fa fa-plus"></i> &nbsp;Nouvelle veterinaire
             </a>
         </small>
     </h1>
@@ -34,7 +34,7 @@
             <div class="portlet grey-cascade box">
                 <div class="portlet-title">
                     <div class="caption">
-                        <span class="caption-subject uppercase">Achats</span>
+                        <span class="caption-subject uppercase">Veterinaire</span>
                     </div>
                     <div class="tools">
                         <a href="" class="fullscreen" data-original-title="Agrandir" title="Agrandir"> </a>
@@ -44,30 +44,22 @@
                     <table class="table table-striped table-bordered dataTable">
                         <thead>
                             <tr>
-                                <th>Fournisseur</th>
-                                <th>Date</th>
-                                <th>Nb Bovins</th>
-                                <th>Montant total transport</th>
-                                <th>Montant total</th>
-                                <th>Bovins</th>
+                                <th>Nome</th>
+                                <th>Telephone</th>
+                                <th>Email</th>
                                 <th>actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($achats as $achat)
+                            @foreach ($veterinaires as $veterinaire)
                                 <tr>
-                                    <td>{{ $achat->fournisseur->nom }}</td>
-                                    <td>{{ dateToFrFormat($achat->date_achat) }}</td>
-                                    <td>{{ count($achat->bovins) }}</td>
-                                    <td>{{ numberToPriceFormat($achat->montantTotalTransportAchat) }}</td>
-                                    <td>{{ numberToPriceFormat($achat->montantTotalAchat) }}</td>
-                                    <td>
-                                        <a href="{{ route('achat.show', ['id' => $achat->id]) }}" class="btn yellow btn-sm uppercase">consulter</a>
-                                    </td>
+                                    <td>{{ $veterinaire->nom }}</td>
+                                    <td>{{ $veterinaire->tel }}</td>
+                                    <td>{{ $veterinaire->email }}</td>
                                     <td class="td-actions">
-                                        <a href="{{ route('achat.show', ['id' => $achat->id]) }}" class="btn blue btn-sm uppercase">Details</a>
-                                        <a href="{{ route('achat.edit', ['id' => $achat->id]) }}" class="btn green-haze btn-sm uppercase"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('achat.edit', ['id' => $achat->id]) }}" class="btn red-haze btn-sm uppercase"><i class="fa fa-trash-o"></i></a>
+                                        <a href="{{ route('veterinaire.show', ['id' => $veterinaire->id]) }}" class="btn blue btn-sm uppercase">Details</a>
+                                        <a href="{{ route('veterinaire.edit', ['id' => $veterinaire->id]) }}" class="btn green-haze btn-sm uppercase"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('veterinaire.destroy', ['id' => $veterinaire->id]) }}" class="btn red-haze btn-sm uppercase"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
