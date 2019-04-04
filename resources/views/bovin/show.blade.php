@@ -23,7 +23,8 @@
     	Bovin N: {{ $bovin->num }}
     	<small class="pull-right">
 		    <a href="{{ route('bovin.index') }}" class="btn red"><i class="icon-arrow-left"></i> Lister les bovins</a>
-		    <a href="{{ route('bovin.create') }}" class="btn green"><i class="icon-arrow-left"></i> Ajouter nouveau bovin</a>
+		    <a href="{{ route('achat.create') }}" class="btn green"><i class="icon-arrow-left"></i> Ajouter nouveau bovin</a>
+		    <a href="{{ route('bovin.edit', ['id' => $bovin->id]) }}" class="btn btn-warning">Editer</a>
         </small>
     </h1>
 
@@ -82,7 +83,7 @@
                     </li>
                 </ul>
             </div>
-            {{-- <ul class="ver-inline-menu tabbable margin-bottom-10">
+            <ul class="ver-inline-menu tabbable margin-bottom-10">
                 <li class="active">
                     <a data-toggle="tab" href="#tab_1">
                         <i class="icon-settings"></i> Poids 
@@ -103,7 +104,7 @@
                         <i class="icon-settings"></i> Visites 
                     </a>
                 </li>
-            </ul> --}}
+            </ul>
     	</div>
     	<div class="col-md-9">
             <div class="tab-content">
@@ -135,7 +136,7 @@
 					    </div>
 					</div>
                 </div>
-                <div id="tab_2" class="tab-pane active">
+                <div id="tab_2" class="tab-pane">
                     <div class="portlet box green">
 					    <div class="portlet-title">
 					        <div class="caption caption-md">
@@ -165,7 +166,7 @@
 					    </div>
 					</div>
                 </div>
-                <div id="tab_3" class="tab-pane active">
+                <div id="tab_3" class="tab-pane">
                     <div class="portlet box blue">
 					    <div class="portlet-title">
 					        <div class="caption caption-md">
@@ -197,7 +198,7 @@
 					    </div>
 					</div>
                 </div>
-                <div id="tab_4" class="tab-pane active">
+                <div id="tab_4" class="tab-pane">
                     <div class="portlet box yellow">
 					    <div class="portlet-title">
 					        <div class="caption caption-md">

@@ -21,14 +21,14 @@
             </li>
             <li class="nav-item start {{ (Request::is(getUrlFromRoute('achat.index')) || Request::is(getUrlFromRoute('achat.create'))) ? 'active open' : '' }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
+                    <i class="fa fa-cart-plus"></i>
                     <span class="title">Achats</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item start {{ Request::is(getUrlFromRoute('achat.index')) ? 'active' : '' }}">
                         <a href="{{ route('achat.index') }}" class="nav-link ">
-                            <i class="icon-user"></i>
+                            <i class="fa fa-cart-plus"></i>
                             <span class="title">Liste des achats</span>
                         </a>
                     </li>
@@ -42,35 +42,29 @@
             </li>
             <li class="nav-item start {{ (Request::is(getUrlFromRoute('bovin.index')) || Request::is(getUrlFromRoute('bovin.create'))) ? 'active open' : '' }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
+                    <i class="fa icon-ghost"></i>
                     <span class="title">Bovins</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item start {{ Request::is(getUrlFromRoute('bovin.index')) ? 'active' : '' }}">
                         <a href="{{ route('bovin.index') }}" class="nav-link ">
-                            <i class="icon-user"></i>
+                            <i class="icon-ghost"></i>
                             <span class="title">Liste des bovins</span>
-                        </a>
-                    </li>
-                    <li class="nav-item start {{ Request::is(getUrlFromRoute('bovin.create')) ? 'active' : '' }}">
-                        <a href="{{ route('bovin.create') }}" class="nav-link ">
-                            <i class="icon-plus"></i>
-                            <span class="title">Nouveau bovin</span>
                         </a>
                     </li>
                 </ul>
             </li>
             <li class="nav-item start {{ (Request::is(getUrlFromRoute('visite.index')) || Request::is(getUrlFromRoute('visite.create'))) ? 'active open' : '' }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
+                    <i class="fa fa-stethoscope"></i>
                     <span class="title">Visites</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item start {{ Request::is(getUrlFromRoute('visite.index')) ? 'active' : '' }}">
                         <a href="{{ route('visite.index') }}" class="nav-link ">
-                            <i class="icon-user"></i>
+                            <i class="fa fa-stethoscope"></i>
                             <span class="title">Liste des visites</span>
                         </a>
                     </li>
@@ -84,7 +78,7 @@
             </li>
             <li class="nav-item start {{ (Request::is(getUrlFromRoute('veterinaire.index')) || Request::is(getUrlFromRoute('veterinaire.create'))) ? 'active open' : '' }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
+                    <i class="fa fa-user-md"></i>
                     <span class="title">Veterinaire</span>
                     <span class="arrow"></span>
                 </a>
@@ -105,14 +99,14 @@
             </li>
             <li class="nav-item start {{ (Request::is(getUrlFromRoute('veterinaire.index')) || Request::is(getUrlFromRoute('veterinaire.create'))) ? 'active open' : '' }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
+                    <i class="fa fa-trash"></i>
                     <span class="title">Pert</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item start {{ Request::is(getUrlFromRoute('pert.index')) ? 'active' : '' }}">
                         <a href="{{ route('pert.index') }}" class="nav-link ">
-                            <i class="icon-user"></i>
+                            <i class="fa fa-trash"></i>
                             <span class="title">Liste des Pert</span>
                         </a>
                     </li>
@@ -148,7 +142,7 @@
             </li>
             <li class="nav-item start {{ (Request::is(getUrlFromRoute('stock.index')) || Request::is(getUrlFromRoute('stock.create'))) ? 'active open' : '' }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
+                    <i class="con-social-dropbox"></i>
                     <span class="title">Gestion du stock</span>
                     <span class="arrow"></span>
                 </a>

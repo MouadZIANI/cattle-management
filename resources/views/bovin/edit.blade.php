@@ -25,6 +25,9 @@
             <a class="btn red btn-md" href="{{ route('achat.index') }}" target="_self">
                 <i class="fa fa-plus"></i> &nbsp; Liste des bovins
             </a>
+            <a class="btn green btn-md" href="{{ route('bovin.show',['id' => $bovin->id]) }}" target="_self">
+                <i class="fa fa-eye"></i> &nbsp; Plus de d'informations
+            </a>
         </small>
     </h1>
     <!-- END PAGE TITLE-->

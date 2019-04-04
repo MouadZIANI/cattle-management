@@ -18,6 +18,10 @@ use App\Models\Achat;
 |
 */ 
 Auth::routes();
+Route::get('/', 'DashboardController@index');
+Route::resource('dashboard', 'DashboardController', [
+    'only' => ['index', 'store', 'destroy']
+]);
 Route::resource('achat', 'AchatController');
 Route::resource('fournisseur', 'FournisseurController');
 Route::resource('pert', 'PertController');
