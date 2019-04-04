@@ -44,7 +44,7 @@ class FournisseurController extends Controller
         $fournisseur->save();
 
         session()->flash('success', 'Fournisseur à été enregistré avec succès !');
-        return redirect()->route('fournisseur.create');
+        return redirect()->route('fournisseur.index');
     }
 
     /**

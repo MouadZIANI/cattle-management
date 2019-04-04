@@ -101,11 +101,10 @@ class VeterinaireController extends Controller
      */
     public function destroy($id)
     {
-        $veterinaire = Veterinaire::find($id);
-        
+        $veterinaire = Veterinaire::findOrFail($id);
         $veterinaire->delete();
-
         session()->flash('success', 'Veterinaire à été sup avec succès !');
+        
         return redirect()->route('veterinaire.index');
     }
 }

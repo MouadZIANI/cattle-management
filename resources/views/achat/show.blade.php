@@ -22,9 +22,6 @@
     <h1 class="page-title"> 
         Achat N° {{ $achat->id }}
         <small class="pull-right">
-            <a class="btn green btn-md" href="{{ route('achat.edit', ['id' => $achat->id]) }}" target="_self">
-                <i class="fa fa-edit"></i> &nbsp; Editer
-            </a>
             <a class="btn red btn-md" href="{{ route('achat.index') }}" target="_self">
                 <i class="fa fa-plus"></i> &nbsp; Liste des acahts
             </a>
@@ -142,7 +139,7 @@
                             @foreach ($achat->bovins as $bovin)
                                 <tr>
                                     <td>
-                                        <a href="{{ route('bovin.show', ['id' => $bovin->num]) }}">{{ $bovin->num }}</a>
+                                        <a href="{{ route('bovin.show', ['id' => $bovin->id]) }}">{{ $bovin->num }}</a>
                                     </td>
                                     <td>{{ $bovin->sexe }}</td>
                                     <td>{{ $bovin->poids_initial }}</td>

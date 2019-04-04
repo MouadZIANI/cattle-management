@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Liste des Fournisseur')
+@section('title', 'Liste des visites')
 
 @section('content')
 <div class="page-content">
@@ -13,17 +13,17 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span>liste des Fournisseurs</span>
+                <span>liste des visites</span>
             </li>
         </ul>
     </div>
     <!-- END PAGE BAR -->
     <!-- BEGIN PAGE TITLE-->
     <h1 class="page-title"> 
-        Liste des Fournisseurs
+        Liste des visites
         <small class="pull-right">
-            <a class="btn red btn-md" href="{{ route('fournisseur.create') }}" target="_self">
-                <i class="fa fa-plus"></i> &nbsp;Nouvelle Fournisseur
+            <a class="btn red btn-md" href="{{ route('visite.create') }}" target="_self">
+                <i class="fa fa-plus"></i> &nbsp;Ajouter une visite
             </a>
         </small>
     </h1>
@@ -34,7 +34,7 @@
             <div class="portlet grey-cascade box">
                 <div class="portlet-title">
                     <div class="caption">
-                        <span class="caption-subject uppercase">Fournisseur</span>
+                        <span class="caption-subject uppercase">Visites</span>
                     </div>
                     <div class="tools">
                         <a href="" class="fullscreen" data-original-title="Agrandir" title="Agrandir"> </a>
@@ -44,27 +44,30 @@
                     <table class="table table-striped table-bordered dataTable">
                         <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>Telephone</th>
-                                <th>Email</th>
-                                <th>Adresse</th>
+                                <th>N°.Bovin</th>
+                                <th>Veterenaire</th>
+                                <th>Type</th>
+                                <th>Date visite</th>
+                                <th>Prix</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($fournisseurs as $fournisseur)
+                            @foreach ($visites as $visite)
                                 <tr>
-                                    <td>{{ $fournisseur->nom }}</td>
-                                    <td>{{ $fournisseur->tel }}</td>
-                                    <td>{{ $fournisseur->email }}</td>
-                                    <td>{{ $fournisseur->adresse }}</td>
+                                    <td>
+                                        <a href="{{ route('bovin.show', ['id' => $visite->bovin->id]) }}">{{ $visite->bovin->num }}</a>
+                                    </td>
+                                    <td>{{ $visite->veterinaire->nom }}</td>
+                                    <td>{{ $visite->type }}</td>
+                                    <td>{{ dateToFrFormat($visite->date) }}</td>
+                                    <td>{{ numberToPriceFormat($visite->prix) }}</td>
                                     <td class="td-actions">
-                                        <a href="{{ route('fournisseur.show', ['id' => $fournisseur->id]) }}" class="btn blue btn-sm uppercase">Details</a>    
-                                        <a href="{{ route('fournisseur.edit', ['id' => $fournisseur->id]) }}" class="btn green-haze btn-sm uppercase"><i class="fa fa-edit"></i></a>
-                                        <form style="display: inline-block;" action="{{ route('fournisseur.destroy', ['id' => 
-                                            $fournisseur->id]) }}" method="post" accept-charset="utf-8">
+                                        <a href="{{ route('visite.show', ['id' => $visite->id]) }}" class="btn blue btn-sm uppercase">Details</a>    
+                                        <form style="display: inline-block;" action="{{ route('visite.destroy', ['id' => 
+                                            $visite->id]) }}" method="post" accept-charset="utf-8">
                                             @csrf
-                                            @Method('DELETE')
+                                            @method('DELETE')
                                             <button  class="btn red-haze btn-sm uppercase">
                                                 <i class="fa fa-trash-o"></i></button>
                                         </form>
