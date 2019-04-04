@@ -42,10 +42,10 @@ class Visite extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function ordonnance()
+    public function ordonnances()
     {
-        return $this->hasOne(Ordonnance::class, 'visite_id');
+        return $this->hasMany(Ordonnance::class, 'visite_id');
     }
 }

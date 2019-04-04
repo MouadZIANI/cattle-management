@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Veterinaire;
 use App\Models\Bovin;
 use App\Models\StockElement;
+use App\Models\Visite;
+use App\Models\Frais;
+use App\Models\Ordonnance;
 
 class VisiteController extends Controller
 {
@@ -16,7 +19,9 @@ class VisiteController extends Controller
      */
     public function index()
     {
-        //
+        return view('visite.index', [
+            'visites' => Visite::all()
+        ]);
     }
 
     /**
@@ -29,7 +34,7 @@ class VisiteController extends Controller
         return view('visite.create', [
             'veterinaires' => Veterinaire::select('id', 'nom')->get(),
             'bovins' => Bovin::select('id', 'num', 'statut')->get(),
-            'medicaments' => StockElement::where('type', 'medicament')->get()
+            'medicaments' => StockElement::where('type', 'Medicaments')->get()
         ]);
     }
 
@@ -41,32 +46,39 @@ class VisiteController extends Controller
      */
     public function store(Request $request)
     {
-        // foreach ($request->bovin as $key => $bovin) {
-        //     $visite = Visite::create([
-        //         'bovin_id' $request->bovin[$key], 
-        //         'veterinaire_id' => $request->veterinaire_id[$key], 
-        //         'type' => $request->type[$key], 
-        //         'date' => $request->date[$key], 
-        //         'prix' => $request->prix[$key], 
-        //         'observation' => $request->observation[$key]
-        //     ]);
-        //     Frais::create([
-        //         'bovin_id' => $visite->bovin_id, 
-        //         'type' => 'Visite', 
-        //         'montant' => $request->prix[$key], 
-        //         'date' => $request->date, 
-        //         'observation' => 'Visite du bovin', 
-        //         'model_id' => $visite->id
-        //     ]);
-        //     Ordonnance::create([
-        //         'medicament_id', 
-        //         'visite_id' => $request->visite_id[$key], 
-        //         'qte' => $request->qte[$key], 
-        //         'posologie' => $request->posologie[$key], 
-        //         'date' => $request->date[$key]
-        //     ]);
-        // }
-        // dd($request->all());
+        // dump($request->all());
+        // die;
+        foreach ($request->bovin as $key => $bovin) {
+            // dump($key);
+            $visite = Visite::create([
+                'bovin_id' => $request->bovin[$key], 
+                'veterinaire_id' => $request->veterinaire_id, 
+                'type' => $request->type, 
+                'date' => $request->date, 
+                'prix' => $request->prix, 
+                'observation' => $request->observation
+            ]);
+            Frais::create([
+                'bovin_id' => $visite->bovin_id, 
+                'type' => 'Visite', 
+                'montant' => $request->prix, 
+                'date' => $request->date, 
+                'observation' => 'Visite du bovin', 
+                'model_id' => $visite->id
+            ]);
+            foreach ($request->medicament[$key] as $keyItem => $value) {
+                Ordonnance::create([
+                    'medicament_id' => $request->medicament[$key][$keyItem], 
+                    'visite_id' => $visite->id, 
+                    'qte' => $request->qte[$key][$keyItem], 
+                    'posologie' => $request->posologie[$key][$keyItem], 
+                    'date' => $request->date
+                ]);
+            }
+        }
+
+        session()->flash('success', 'Visite à été enregistré avec succès !');
+        return redirect()->route('visite.index');
     }
 
     /**
@@ -77,30 +89,9 @@ class VisiteController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return view('visite.show', [
+            'visite' => Visite::findOrFail($id)
+        ]);
     }
 
     /**
@@ -111,6 +102,10 @@ class VisiteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $visite = Visite::findOrFail($id);
+        $visite->delete();
+
+        session()->flash('success', 'Visite à été supprimé avec succès !');
+        return redirect()->route('visite.index');
     }
 }
