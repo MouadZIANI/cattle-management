@@ -17,3 +17,12 @@ if (!function_exists("getElementStockType")) {
 		];	
 	}
 }
+if (!function_exists("getPertTypes")) {
+	function getPertTypes() {
+		return [
+			'Voler' => 'Voler',
+			'Mort' => 'Mort',
+			'Autre' => 'Autre'
+		];	
+	}
+}
