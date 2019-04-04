@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Bovin;
+use App\Models\Pert;
 
 class PertController extends Controller
 {
@@ -23,7 +25,9 @@ class PertController extends Controller
      */
     public function create()
     {
-        return view('pert.create');
+        return view('pert.create', [
+            'bovins' => Bovin::select('id', 'num', 'statut')->get()
+        ]);
     }
 
     /**
@@ -34,7 +38,17 @@ class PertController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach ($request->bovin as $key => $bovin) {
+            Pert::create([
+                'bovin_id' => $bovin, 
+                'type' => $request->type[$key], 
+                'date' => $request->date[$key],  
+                'observation' => $request->observation[$key], 
+            ]);
+        }
+        session()->flash('success', 'Les bovins sont ajoutées au pert aves succès !');
+
+        return redirect()->route('pert.create');
     }
 
     /**

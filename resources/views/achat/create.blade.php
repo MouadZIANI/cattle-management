@@ -134,7 +134,7 @@
                                 </td>
                                 <td>
                                     <select name="sexe[]" class="form-control" id="sexe">
-                                        <option value="H">H</option>
+                                        <option value="H">M</option>
                                         <option value="F">F</option>
                                     </select>
                                 </td>
