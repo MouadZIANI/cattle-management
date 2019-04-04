@@ -15,7 +15,9 @@ class PertController extends Controller
      */
     public function index()
     {
-        //
+        return view('pert.index', [
+            'perts' => Pert::all()
+        ]);
     }
 
     /**
@@ -59,7 +61,7 @@ class PertController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
