@@ -67,6 +67,12 @@
 		}
 	}
 
+	if(!function_exists('addPourcentage')) {
+		function addPourcentage($price, $pourcentage) {
+			return numberToPriceFormat($price + ($price * ($pourcentage / 100)));
+		}
+	}
+
 
 
 

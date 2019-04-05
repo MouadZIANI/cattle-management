@@ -26,3 +26,15 @@ if (!function_exists("getPertTypes")) {
 		];	
 	}
 }
+if (!function_exists("getInitPourcentages")) {
+	function getInitPourcentages() {
+		return [
+			'10' => '10 %',
+			'15' => '15 %',
+			'20' => '20 %',
+			'25' => '25 %',
+			'30' => '30 %',
+			'35' => '35 %',
+		];	
+	}
+}

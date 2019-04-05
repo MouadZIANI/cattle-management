@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Bovin;
 use App\Models\Achat;
 use App\Models\Poid;
+use Carbon\Carbon;
+use PDF;
 
 class BovinController extends Controller
 {
@@ -76,8 +78,8 @@ class BovinController extends Controller
                 'observation' => $request->observation[$key]
             ]);
         }
-        session()->flash('success', 'Les information du bovin sont enregistré avec succès !');
 
+        session()->flash('success', 'Les information du bovin sont enregistré avec succès !');
         return redirect()->back();
     }
 
@@ -89,6 +91,78 @@ class BovinController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $bovin = Bovin::findOrFail($id);
+        $bovin->delete();
+        
+        session()->flash('success', 'Le bovin à ete supprimé avec succès !');
+        return redirect()->back();
+    }
+
+    public function availableBovin()
+    {
+        return view('cherches.index', [
+            'bovins' => Bovin::where('statut', 'Actif')->get(),
+            'pourcentage' => 20
+        ]);
+    }
+
+    public function searchAvailableBovin(Request $request)
+    {
+        $request->validate([
+            'from' => 'required|numeric',
+            'to' => 'required|numeric',
+            'nbre' => 'required|numeric',
+            'pourcentage' => 'required|numeric'
+        ]);
+        $nbre = 0;
+        $bovins = [];
+        foreach (Bovin::where('statut', 'Actif')->get() as $key => $bovin) {
+            if($nbre > $request->nbre)
+                break;
+            if(($bovin->poidsActuel >= $request->from) && ($bovin->poidsActuel <= $request->to)){
+                $bovins[] = $bovin;
+                $nbre++;
+            }
+        }
+        return view('cherches.index', [
+            'bovins' => $bovins,
+            'from' => $request->from,
+            'to' => $request->to,
+            'nbre' => $request->nbre,
+            'pourcentage' => $request->pourcentage,
+        ]);
+    }
+
+    public function exportAvailableBovins()
+    {
+        if(request()->input('from') && request()->input('to') && request()->input('nbre') && request()->input('pourcentage')) {
+            $nbre = 0;
+            $bovins = [];
+            foreach (Bovin::where('statut', 'Actif')->get() as $key => $bovin) {
+                if($nbre > request()->input('nbre'))
+                    break;
+                if(($bovin->poidsActuel >= request()->input('from')) && ($bovin->poidsActuel <= request()->input('to'))){
+                    $bovins[] = $bovin;
+                    $nbre++;
+                }
+            }
+            $pdf = PDF::loadView('exports.available-bovins', [
+                'bovins' => $bovins,
+                'from' => request()->input('from'),
+                'to' => request()->input('to'),
+                'date' => Carbon::now(),
+                'pourcentage' => request()->input('pourcentage')
+            ]);
+        } else {
+            $pdf = PDF::loadView('exports.available-bovins', [
+                'bovins' => Bovin::where('statut', 'Actif')->get(),
+                'from' => null,
+                'to' => null,
+                'date' => Carbon::now(),
+                'pourcentage' => 20
+            ]);
+        }
+        
+        return $pdf->download('bovins.pdf');
     }
 }

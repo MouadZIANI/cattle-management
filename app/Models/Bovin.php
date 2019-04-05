@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 /**
  * @property int $id
@@ -87,4 +88,29 @@ class Bovin extends Model
     {
         return $this->hasMany(Visite::class, 'bovin_id');
     }
+
+    /**
+     * Get last weight
+     *
+     * @return float
+     */
+    public function getPoidsActuelAttribute() 
+    {
+        return (isset($this->poids[0]) && $this->poids[0]->poids) 
+            ? $this->poids[0]->poids
+            : $this->poids_initial;
+    }
+
+    public function getTotalDepancesAttribute()
+    {
+        return $this->frais->sum('montant') + $this->prix;
+    }
+
+    public function getAgeActuelAttribute()
+    {
+        $to = Carbon::createFromFormat('Y-m-d H:s:i', $this->created_at);
+        $from = Carbon::now();
+        return $to->diffInMonths($from) + $this->age_initial;
+    }
+
 }

@@ -26,11 +26,19 @@ Route::resource('achat', 'AchatController');
 Route::resource('fournisseur', 'FournisseurController');
 Route::resource('pert', 'PertController');
 Route::resource('bovin', 'BovinController');
+Route::get('available-bovin', 'BovinController@availableBovin');
+Route::post('available-bovin', 'BovinController@searchAvailableBovin')->name('searchAvailableBovin');
+Route::get('exports/available-bovin', 'BovinController@exportAvailableBovins');
 Route::resource('visite', 'VisiteController');
 Route::resource('veterinaire', 'VeterinaireController');
 Route::resource('stock', 'VeterinaireController');
 Route::resource('stockelement', 'StockElementController');
 Route::get('total', function () {
+	$to = Carbon\Carbon::createFromFormat('Y-m-d H:s:i', "2019-01-20 02:14:08");
+    $from = Carbon\Carbon::now();
+    $diff_in_days = $to->diffInMonths($from);
+    dd($diff_in_days);
+	dd(Carbon\Carbon::now());
 	foreach (Achat::all() as $key => $achat) {
 		dump($achat->montantTotalTransportAchat);
 	}

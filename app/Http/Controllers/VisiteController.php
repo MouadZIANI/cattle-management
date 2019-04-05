@@ -46,10 +46,7 @@ class VisiteController extends Controller
      */
     public function store(Request $request)
     {
-        // dump($request->all());
-        // die;
         foreach ($request->bovin as $key => $bovin) {
-            // dump($key);
             $visite = Visite::create([
                 'bovin_id' => $request->bovin[$key], 
                 'veterinaire_id' => $request->veterinaire_id, 
@@ -67,12 +64,21 @@ class VisiteController extends Controller
                 'model_id' => $visite->id
             ]);
             foreach ($request->medicament[$key] as $keyItem => $value) {
-                Ordonnance::create([
+                $ordonnance = Ordonnance::create([
                     'medicament_id' => $request->medicament[$key][$keyItem], 
                     'visite_id' => $visite->id, 
                     'qte' => $request->qte[$key][$keyItem], 
                     'posologie' => $request->posologie[$key][$keyItem], 
                     'date' => $request->date
+                ]);
+                $medicament = StockElement::find($request->medicament[$key][$keyItem]);
+                Frais::create([
+                    'bovin_id' => $visite->bovin_id, 
+                    'type' => 'Medicament Ordonnace', 
+                    'montant' => $medicament->prix * $request->qte[$key][$keyItem], 
+                    'date' => $request->date, 
+                    'observation' => 'Consomation de medicament', 
+                    'model_id' => $ordonnance->id
                 ]);
             }
         }
