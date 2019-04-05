@@ -28,7 +28,7 @@ class PertController extends Controller
     public function create()
     {
         return view('pert.create', [
-            'bovins' => Bovin::select('id', 'num', 'statut')->get()
+            'bovins' => Bovin::where('statut', 'Actif')->select('id', 'num', 'statut')->get()
         ]);
     }
 
@@ -47,54 +47,10 @@ class PertController extends Controller
                 'date' => $request->date[$key],  
                 'observation' => $request->observation[$key], 
             ]);
+            Bovin::findOrFail($bovin)->update(['statut' => 'Non actif']);
         }
         session()->flash('success', 'Les bovins sont ajoutées au pert aves succès !');
 
-        return redirect()->route('pert.create');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect()->route('pert.index');
     }
 }

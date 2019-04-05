@@ -14,6 +14,7 @@ if (!function_exists("getElementStockType")) {
 		return [
 			'Medicaments' => 'Medicaments',
 			'Norritures' => 'Norritures',
+			'Autres' => 'Autres',
 		];	
 	}
 }

@@ -10,11 +10,8 @@
                 </div>
             </li>
             <br>
-            <li class="heading">
-                <h3 class="uppercase">Metier</h3>
-            </li>
-            <li class="start">
-                <a href="{{ url('/') }}">
+            <li class="start {{ (Request::is(getUrlFromRoute('dashboard.index')) || Request::is('/')) ? 'active open' : '' }}">
+                <a href="{{ route('dashboard.index') }}">
                     <i class="icon-graph"></i>
                     <span class="title">Tableau de bord</span>
                 </a>
@@ -55,6 +52,12 @@
                     </li>
                 </ul>
             </li>
+            <li class="start {{ Request::is(getUrlFromRoute('available-bovin')) ? 'active open' : '' }}">
+                <a href="{{ route('available-bovin') }}">
+                    <i class="icon-diamond"></i>
+                    <span class="title">Préparation au vente</span>
+                </a>
+            </li>
             <li class="nav-item start {{ (Request::is(getUrlFromRoute('visite.index')) || Request::is(getUrlFromRoute('visite.create'))) ? 'active open' : '' }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-stethoscope"></i>
@@ -75,6 +78,12 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+            <li class="start {{ Request::is(getUrlFromRoute('nourriture.create')) ? 'active open' : '' }}">
+                <a href="{{ route('nourriture.create') }}">
+                    <i class="icon-graph"></i>
+                    <span class="title">Nourritures</span>
+                </a>
             </li>
             <li class="nav-item start {{ (Request::is(getUrlFromRoute('veterinaire.index')) || Request::is(getUrlFromRoute('veterinaire.create'))) ? 'active open' : '' }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
@@ -97,7 +106,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item start {{ (Request::is(getUrlFromRoute('veterinaire.index')) || Request::is(getUrlFromRoute('veterinaire.create'))) ? 'active open' : '' }}">
+            <li class="nav-item start {{ (Request::is(getUrlFromRoute('pert.index')) || Request::is(getUrlFromRoute('pert.create'))) ? 'active open' : '' }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-trash"></i>
                     <span class="title">Pert</span>
@@ -118,7 +127,6 @@
                     </li>
                 </ul>
             </li>
-
             <li class="nav-item start {{ (Request::is(getUrlFromRoute('fournisseur.index')) || Request::is(getUrlFromRoute('fournisseur.create'))) ? 'active open' : '' }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-users"></i>
@@ -140,23 +148,26 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item start {{ (Request::is(getUrlFromRoute('stock.index')) || Request::is(getUrlFromRoute('stock.create'))) ? 'active open' : '' }}">
+            <li class="heading">
+                <h3 class="uppercase">Depances</h3>
+            </li>
+            <li class="nav-item start {{ (Request::is(getUrlFromRoute('stockelement.index')) || Request::is(getUrlFromRoute('stockelement.create'))) ? 'active open' : '' }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="con-social-dropbox"></i>
                     <span class="title">Gestion du stock</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item start {{ Request::is(getUrlFromRoute('stock.index')) ? 'active' : '' }}">
+                    <li class="nav-item start {{ Request::is(getUrlFromRoute('stockelement.index')) ? 'active' : '' }}">
                         <a href="{{ route('stockelement.index') }}" class="nav-link ">
                             <i class="icon-user"></i>
                             <span class="title">Stocks</span>
                         </a>
                     </li>
-                    <li class="nav-item start {{ Request::is(getUrlFromRoute('stock.create')) ? 'active' : '' }}">
+                    <li class="nav-item start {{ Request::is(getUrlFromRoute('stockelement.create')) ? 'active' : '' }}">
                         <a href="{{ route('stockelement.create') }}" class="nav-link ">
                             <i class="icon-plus"></i>
-                            <span class="title">Ajouter element au stock</span>
+                            <span class="title">Nouveau element</span>
                         </a>
                     </li>
                 </ul>

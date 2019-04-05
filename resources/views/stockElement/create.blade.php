@@ -46,7 +46,7 @@
                                 <th>Designation</th>
                                 <th>Type</th>
                                 <th>Quantite</th>
-                                <th>Prix</th>
+                                <th>Prix unitaire</th>
                                 <th>
                                     <button id="add-row-to-bovin-table" type="button" class="btn green"><i class="fa fa-plus"></i></button>
                                 </th>

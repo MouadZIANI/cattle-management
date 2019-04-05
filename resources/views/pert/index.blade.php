@@ -22,8 +22,8 @@
     <h1 class="page-title"> 
         Liste des Perts
         <small class="pull-right">
-            <a class="btn red btn-md" href="{{ route('achat.create') }}" target="_self">
-                <i class="fa fa-plus"></i> &nbsp;Nouvelle achat
+            <a class="btn red btn-md" href="{{ route('pert.create') }}" target="_self">
+                <i class="fa fa-plus"></i> &nbsp;Ajouter bovin au pert
             </a>
         </small>
     </h1>
@@ -48,7 +48,6 @@
                                 <th>Type</th>
                                 <th>Date</th>
                                 <th>Observation</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,17 +59,6 @@
                                     <td>{{ $pert->type }}</td>
                                     <td>{{ dateToFrFormat($pert->date) }}</td>
                                     <td>{{ $pert->observation }}</td>
-                                    <td class="td-actions">
-                                        <a href="{{ route('pert.show', ['id' => $pert->id]) }}" class="btn blue btn-sm uppercase">Details</a>    
-                                        <a href="{{ route('pert.edit', ['id' => $pert->id]) }}" class="btn green-haze btn-sm uppercase"><i class="fa fa-edit"></i></a>
-                                        <form style="display: inline-block;" action="{{ route('pert.destroy', ['id' => 
-                                            $pert->id]) }}" method="post" accept-charset="utf-8">
-                                            @csrf
-                                            @Method('DELETE')
-                                            <button  class="btn red-haze btn-sm uppercase">
-                                                <i class="fa fa-trash-o"></i></button>
-                                        </form>
-                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

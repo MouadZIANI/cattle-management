@@ -18,7 +18,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // 
         $countBouvins = Bovin::all()->count();
         $countEnQuarantineBouvins = Bovin::where('statut', 'En quarantine')->count();
         $countActifBouvins = Bovin::where('statut', 'Actif')->count();
@@ -27,13 +26,13 @@ class DashboardController extends Controller
         $countAchats = Achat::all()->count();
         $currentMonth = date('m');
         $totalDepanceForThisMonth = Frais::whereRaw('MONTH(created_at) = ?', [$currentMonth])->sum('montant');
-        $vents = 18;
+        $countVisites = Visite::whereRaw('MONTH(created_at) = ?', [$currentMonth])->count();
 
         // Listings
         $lastBovins = Bovin::take(10)->get();
         $lastAchats = Achat::take(10)->get();
 
-        return view('dashboard.index', compact('countBouvins', 'countEnQuarantineBouvins', 'countActifBouvins', 'countNonActifBouvins', 'countPertsBouvins', 'countAchats', 'vents', 'totalDepanceForThisMonth', 'lastBovins', 'lastAchats'));
+        return view('dashboard.index', compact('countBouvins', 'countEnQuarantineBouvins', 'countActifBouvins', 'countNonActifBouvins', 'countPertsBouvins', 'countAchats', 'countVisites', 'totalDepanceForThisMonth', 'lastBovins', 'lastAchats'));
     }
 
     /**

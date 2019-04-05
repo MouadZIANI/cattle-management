@@ -20,15 +20,10 @@
                 <li class="dropdown dropdown-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <img alt="" class="img-circle" src="{{ asset('assets2/custom/images/picto-man.png') }}"/>
-                        <span class="username username-hide-on-mobile"> {{-- {{ Auth::user()->fullName }} --}} </span>
+                        <span class="username username-hide-on-mobile"> {{ Auth::user()->name }} </span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
-                        <li>
-                            <a href="page_user_profile_1.html">
-                                <i class="icon-user"></i> Mon profile </a>
-                        </li>
-                        <li class="divider"> </li>
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="icon-key"></i> Se déconnecter </a>

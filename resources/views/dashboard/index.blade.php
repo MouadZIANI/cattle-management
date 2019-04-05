@@ -123,9 +123,9 @@
                 </div>
                 <div class="details">
                     <div class="number">
-                        <span data-counter="counterup" data-value="{{ $vents }}">0</span> DH
+                        <span data-counter="counterup" data-value="{{ $countVisites }}">0</span>
                     </div>
-                    <div class="desc">Total ventes deriner mois </div>
+                    <div class="desc">Nbre. visites deriner mois </div>
                 </div>
             </a>
         </div>

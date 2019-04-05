@@ -22,9 +22,35 @@
     <h1 class="page-title"> 
     	Bovin N: {{ $bovin->num }}
     	<small class="pull-right">
-		    <a href="{{ route('bovin.index') }}" class="btn red"><i class="icon-arrow-left"></i> Lister les bovins</a>
-		    <a href="{{ route('achat.create') }}" class="btn green"><i class="icon-arrow-left"></i> Ajouter nouveau bovin</a>
-		    <a href="{{ route('bovin.edit', ['id' => $bovin->id]) }}" class="btn btn-warning">Editer</a>
+            <button type="button" data-toggle="tab" href="#tab_frais" class="btn red-sunglo">
+                <i class="fa fa-money"></i> Frais
+            </button>
+            <button type="button" data-toggle="tab" href="#tab_poids" class="btn green-meadow">
+                <i class="icon-graph"></i> Poids
+            </button>
+            <button type="button" data-toggle="tab" href="#tab_nourritures" class="btn purple-plum">
+                <i class="icon-puzzle"></i> Nourritures
+            </button>
+            <button type="button" data-toggle="tab" href="#tab_visites" class="btn grey-cascade">
+                <i class="fa fa-stethoscope"></i> Visites
+            </button>
+            <div class="btn-group btn-group-solid">
+                <button type="button" class="btn yellow dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-ellipsis-horizontal"></i> Autres actions
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{{ route('achat.create') }}"> Lister les bovins</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('bovin.index') }}"> Ajouter nouveau bovin</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('bovin.edit', ['id' => $bovin->id]) }}"> Modifier ces informations</a>
+                    </li>
+                </ul>
+            </div>
         </small>
     </h1>
 
@@ -83,33 +109,11 @@
                     </li>
                 </ul>
             </div>
-            <ul class="ver-inline-menu tabbable margin-bottom-10">
-                <li class="active">
-                    <a data-toggle="tab" href="#tab_1">
-                        <i class="icon-settings"></i> Poids 
-                    </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#tab_2">
-                        <i class="icon-settings"></i> Frais 
-                    </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#tab_3">
-                        <i class="icon-settings"></i> Nourritures 
-                    </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#tab_4">
-                        <i class="icon-settings"></i> Visites 
-                    </a>
-                </li>
-            </ul>
     	</div>
     	<div class="col-md-9">
             <div class="tab-content">
-                <div id="tab_1" class="tab-pane active">
-                    <div class="portlet box red">
+                <div id="tab_poids" class="tab-pane">
+                    <div class="portlet box green-meadow">
 					    <div class="portlet-title">
 					        <div class="caption caption-md">
 					            <i class="icon-globe theme-font"></i>
@@ -136,8 +140,8 @@
 					    </div>
 					</div>
                 </div>
-                <div id="tab_2" class="tab-pane">
-                    <div class="portlet box green">
+                <div id="tab_frais" class="tab-pane active">
+                    <div class="portlet box red">
 					    <div class="portlet-title">
 					        <div class="caption caption-md">
 					            <i class="icon-globe theme-font"></i>
@@ -154,8 +158,10 @@
 	                            </tr>
 	                            @forelse ($bovin->frais as $frais)
 	                                <tr>
-	                                    <td>{{ $frais->date }}</td>
-	                                    <td>{{ $frais->type }}</td>
+	                                    <td>{{ dateToFrFormat($frais->date) }}</td>
+	                                    <td>
+	                                    	<span class="badge badge-warning">{{ $frais->type }}</span>
+	                                    </td>
 	                                    <td>{{ numberToPriceFormat($frais->montant) }}</td>
 	                                    <td>{{ $frais->observation }}</td>
 	                                </tr>
@@ -166,8 +172,8 @@
 					    </div>
 					</div>
                 </div>
-                <div id="tab_3" class="tab-pane">
-                    <div class="portlet box blue">
+                <div id="tab_visites" class="tab-pane">
+                    <div class="portlet box grey-cascade">
 					    <div class="portlet-title">
 					        <div class="caption caption-md">
 					            <i class="icon-globe theme-font"></i>
@@ -182,6 +188,7 @@
 	                                <th>Type</th>
 	                                <th>Prix</th>
 	                                <th>Observation</th>
+	                                <th>#</th>
 	                            </tr>
 	                            @forelse ($bovin->visites as $visite)
 	                                <tr>
@@ -190,6 +197,9 @@
 	                                    <td>{{ $visite->type }}</td>
 	                                    <td>{{ numberToPriceFormat($visite->observation) }}</td>
 	                                    <td>{{ $visite->observation }}</td>
+	                                    <td>
+											<a href="{{ route('visite.show', ['id' => $visite->id]) }}" class="btn blue btn-sm uppercase">Details</a>
+	                                    </td>
 	                                </tr>
 	                            @empty
 	                                ---
@@ -198,8 +208,8 @@
 					    </div>
 					</div>
                 </div>
-                <div id="tab_4" class="tab-pane">
-                    <div class="portlet box yellow">
+                <div id="tab_nourritures" class="tab-pane">
+                    <div class="portlet box purple-plum">
 					    <div class="portlet-title">
 					        <div class="caption caption-md">
 					            <i class="icon-globe theme-font"></i>
@@ -210,16 +220,13 @@
 					   		<table id="bovin-table" class="table table-striped table-bordered">
 	                            <tr>
 	                                <th>Date</th>
-	                                <th>Veterinaire</th>
-	                                <th>Type</th>
-	                                <th>Prix</th>
-	                                <th>Observation</th>
+	                                <th>Element</th>
+	                                <th>Quantité</th>
 	                            </tr>
 	                            @forelse ($bovin->nourritures as $nourriture)
 	                                <tr>
 	                                    <td>{{ dateToFrFormat($nourriture->date) }}</td>
 	                                    <td>{{ $nourriture->stockElement->designation }}</td>
-	                                    <td>{{ $nourriture->type }}</td>
 	                                    <td>{{ $nourriture->qte }}</td>
 	                                </tr>
 	                            @empty
